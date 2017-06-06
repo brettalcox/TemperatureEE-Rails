@@ -1,0 +1,15 @@
+= javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
+
+%h2 Temperature Data
+= line_chart [ {name: "Ambient Temperature", data: @temperature_data.map{|t| [ t['loggedTime'], t['ambientTemperature'] ]}},
+{name: "Outside Temperature", data: @temperature_data.map{|t| [ t['loggedTime'], t['outsideTemperature'] ]}},
+{name: "Target Temperature", data: @temperature_data.map{|t| [ t['loggedTime'], t['targetTemperature'] ]}}], points: false, legend: "right"
+
+%br
+%h2 Humidity Data
+= line_chart [ {name: "Ambient Humidity", data: @temperature_data.map{|t| [ t['loggedTime'], t['ambientHumidity'] ]}},
+{name: "Outside Humidity", data: @temperature_data.map{|t| [ t['loggedTime'], t['outsideHumidity'] ]}}], points: false, legend: "right"
+
+%br
+%h2 HVAC Data
+= timeline [ @temperature_data.map{|t| [ t['hvacState'], t['loggedTime'], (Time.parse(t['loggedTime']) + 15*60).to_s ]} ][0]
