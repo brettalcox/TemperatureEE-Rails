@@ -1,0 +1,12 @@
+= javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
+
+%h2 Temperature Data
+= line_chart chart_get_temp_path, points: false, legend: "right"
+
+%br
+%h2 Humidity Data
+= line_chart chart_get_humid_path, points: false, legend: "right"
+
+%br
+%h2 HVAC Data
+= timeline chart_get_hvac_path
